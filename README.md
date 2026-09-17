@@ -42,26 +42,7 @@ Bootstrap Grid와 CSS Media Query를 함께 사용했습니다. 데스크톱에�
 
 Bootstrap Grid로 기본 반응형 구조를 빠르게 만들 수 있지만 서비스 분위기를 표현하려면 타이포그래피, 여백, 이미지 비율을 함께 설계해야 한다는 점을 배웠습니다. HTML의 제약 속성과 JavaScript의 `checkValidity()`를 결합해 일관된 검증 피드백을 제공하는 방법도 알게 되었습니다.
 
-## Weekly Question
-
-### 문제 1 — 객관식
-
-Bootstrap에서 중간 크기 이상의 화면에는 두 열로, 그보다 작은 화면에는 한 열로 표시하려면 가장 적절한 클래스는 무엇인가요?
-
-1. `col-6`
-2. `col-md-6`
-3. `row-md-2`
-4. `container-6`
-
-**정답:** 2번 `col-md-6`  
-**해설:** `col-md-6`은 `md` 이상에서 12칸 중 6칸을 차지하며 작은 화면에서는 전체 너비를 차지합니다.
-
-### 문제 2 — OX
-
-HTML 폼에 `novalidate`를 지정하면 `required`, `minlength` 같은 제약 조건 자체도 모두 동작하지 않는다.
-
-**정답:** X  
-**해설:** `novalidate`는 브라우저의 기본 검증 UI를 끄지만 JavaScript의 `checkValidity()`로 제약 조건의 유효성을 확인할 수 있습니다.
+ `novalidate`는 브라우저의 기본 검증 UI를 끄지만 JavaScript의 `checkValidity()`로 제약 조건의 유효성을 확인할 수 있습니다.
 
 ## Pages
 
