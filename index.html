@@ -24,18 +24,30 @@
       <div class="col-lg-3 hero-copy"><p>다녀온 여행지를 사진과 짧은 기록으로 모아두는 개인 여행 아카이브입니다.</p><a class="text-link" href="add.html">새 기록 남기기 <span aria-hidden="true">↗</span></a></div>
     </div></header>
     <section class="archive-section page-shell" aria-labelledby="archive-title">
-      <div class="section-heading"><h2 id="archive-title">기억의 목록</h2><span>06 PLACES</span></div>
-      <div class="row g-4 g-xl-5">
-        <div class="col-md-6"><article class="travel-card"><a href="view.html?id=porto" class="card-image-link" aria-label="포르투 여행 상세 보기"><img src="https://images.unsplash.com/photo-1555881400-74d7acaacd8b?auto=format&fit=crop&w=1200&q=80" alt="포르투의 주황색 지붕과 강 풍경"><span class="card-number">01</span></a><div class="card-copy"><div><p class="card-meta">PORTUGAL · 2025.06.14</p><h3><a href="view.html?id=porto">포르투, 느린 강변의 오후</a></h3></div><span class="rating" aria-label="만족도 5점">★★★★★</span></div></article></div>
-        <div class="col-md-6"><article class="travel-card offset-card"><a href="view.html?id=kyoto" class="card-image-link" aria-label="교토 여행 상세 보기"><img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=80" alt="교토의 전통 거리와 오층탑"><span class="card-number">02</span></a><div class="card-copy"><div><p class="card-meta">JAPAN · 2024.11.08</p><h3><a href="view.html?id=kyoto">교토, 붉게 물든 골목</a></h3></div><span class="rating" aria-label="만족도 5점">★★★★★</span></div></article></div>
-        <div class="col-md-6"><article class="travel-card"><a href="view.html?id=barcelona" class="card-image-link" aria-label="바르셀로나 여행 상세 보기"><img src="https://images.unsplash.com/photo-1583422409516-2895a77efded?auto=format&fit=crop&w=1200&q=80" alt="바르셀로나 구엘 공원의 타일 장식"><span class="card-number">03</span></a><div class="card-copy"><div><p class="card-meta">SPAIN · 2024.07.21</p><h3><a href="view.html?id=barcelona">바르셀로나, 색과 곡선의 도시</a></h3></div><span class="rating" aria-label="만족도 4점">★★★★☆</span></div></article></div>
-        <div class="col-md-6"><article class="travel-card offset-card"><a href="view.html?id=jeju" class="card-image-link" aria-label="제주 여행 상세 보기"><img src="https://images.unsplash.com/photo-1642950722659-94734c495370?auto=format&fit=crop&w=1200&q=80" alt="제주의 바다와 검은 현무암 해안"><span class="card-number">04</span></a><div class="card-copy"><div><p class="card-meta">KOREA · 2023.05.03</p><h3><a href="view.html?id=jeju">제주, 바람을 따라 걷던 날</a></h3></div><span class="rating" aria-label="만족도 5점">★★★★★</span></div></article></div>
-        <div class="col-md-6"><article class="travel-card"><a href="view.html?id=paris" class="card-image-link" aria-label="파리 여행 상세 보기"><img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80" alt="파리 에펠탑과 세느강 풍경"><span class="card-number">05</span></a><div class="card-copy"><div><p class="card-meta">FRANCE · 2022.09.17</p><h3><a href="view.html?id=paris">파리, 비 온 뒤의 저녁</a></h3></div><span class="rating" aria-label="만족도 4점">★★★★☆</span></div></article></div>
-        <div class="col-md-6"><article class="travel-card offset-card"><a href="view.html?id=new-york" class="card-image-link" aria-label="뉴욕 여행 상세 보기"><img src="https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?auto=format&fit=crop&w=1200&q=80" alt="뉴욕 맨해튼의 거리와 건물"><span class="card-number">06</span></a><div class="card-copy"><div><p class="card-meta">USA · 2021.12.24</p><h3><a href="view.html?id=new-york">뉴욕, 겨울의 빛과 소음</a></h3></div><span class="rating" aria-label="만족도 5점">★★★★★</span></div></article></div>
-      </div>
+      <div class="section-heading"><h2 id="archive-title">기억의 목록</h2><span id="placeCount">00 PLACES</span></div>
+      <div class="row g-4 g-xl-5" id="travelGrid"></div>
     </section>
   </main>
   <footer class="site-footer"><div class="page-shell"><p>과거의 여행은 오늘의 감각이 됩니다.</p><div><span>© 2026 머문 장면</span><a href="#top">맨 위로 ↑</a></div></div></footer>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script><script src="travel-store.js"></script>
+  <script>
+    const grid=document.getElementById("travelGrid");
+    const travels=TravelStore.getAll();
+    document.getElementById("placeCount").textContent=`${String(travels.length).padStart(2,"0")} PLACES`;
+    travels.forEach((travel,index)=>{
+      const column=document.createElement("div");column.className="col-md-6";
+      const article=document.createElement("article");article.className=`travel-card${index%2 ? " offset-card" : ""}`;
+      const imageLink=document.createElement("a");imageLink.className="card-image-link";imageLink.href=`view.html?id=${encodeURIComponent(travel.id)}`;imageLink.setAttribute("aria-label",`${travel.city} 여행 상세 보기`);
+      const image=document.createElement("img");image.src=travel.image;image.alt=travel.alt||`${travel.city} 여행 사진`;
+      const number=document.createElement("span");number.className="card-number";number.textContent=String(index+1).padStart(2,"0");
+      imageLink.append(image,number);
+      const copy=document.createElement("div");copy.className="card-copy";
+      const text=document.createElement("div"),meta=document.createElement("p"),heading=document.createElement("h3"),titleLink=document.createElement("a");
+      meta.className="card-meta";meta.textContent=`${travel.countryEn||travel.country.toUpperCase()} · ${TravelStore.formatDate(travel.date)}`;
+      titleLink.href=imageLink.href;titleLink.textContent=`${travel.city}, ${travel.title}`;heading.append(titleLink);text.append(meta,heading);
+      const rating=document.createElement("span");rating.className="rating";rating.setAttribute("aria-label",`만족도 ${travel.rating}점`);rating.textContent=`${"★".repeat(travel.rating)}${"☆".repeat(5-travel.rating)}`;
+      copy.append(text,rating);article.append(imageLink,copy);column.append(article);grid.append(column);
+    });
+  </script>
 </body>
 </html>
